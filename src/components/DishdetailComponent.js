@@ -1,47 +1,79 @@
-import React, {Component} from 'react';
-import {Card, CardBody, CardDeck, CardGroup, CardImg, CardText, CardTitle} from "reactstrap";
+import React, { Component } from 'react';
+import { Card, CardImg, CardImgOverlay, CardText, CardBody,
+    CardTitle } from 'reactstrap';
 
-class Dishdetail extends Component {
-    constructor(props) {
+class DishDetail extends Component {
+
+    constructor(props){
         super(props);
 
-        this.state={
-        }
+
     }
 
+    renderComments(comnt)
+    {
+        if( comnt != null)
+        {
+            const coment = comnt.map((cmnt) => {
+                return (
+                    <div key={cmnt.id}>
+                        <p> {cmnt.comment} </p>
+                        <p> -- {cmnt.author} , {cmnt.date} </p>
+                    </div>
+                );
+            });
 
-    render() {
-        const dish = this.props.selectedDish
-        if(dish != null){
             return (
-                <CardDeck className="col-12 col-md-10 m-1">
-                    <Card>
-                        <CardImg width={"100%"} src={dish.image} alt={dish.name}/>
-                        <CardTitle width={"100%"} >{dish.name}</CardTitle>
-                        <CardText>{dish.description}</CardText>
-                    </Card>
+                <div  className="col-12 col-md-5 m-1">
+                    <h4>Comments</h4>
+                    {coment}
+                </div>
+            )
+        }
+        else return(
+            <div  className="col-12 col-md-5 m-1">
+                <h4>Comments</h4>
+            </div>
+        )
+    }
 
-                    <Card>
-                        <CardBody>
-                            <CardTitle width={"100%"} >Comments</CardTitle>
-                            {dish.comments.map((comment)=>{
-                                let date= new Date(comment.date);
-                                return(
-                                <CardText>
-                                    {comment.comment}<br/><br/>-- {comment.author} , {date.toLocaleString('default', { month: 'short' })} {date.getDay()}, {date.getFullYear()}
-                                </CardText>
-                               );
-                            })}
-                        </CardBody>
-                    </Card>
-                </CardDeck>
-            );
-        }else{
+    renderDish(dish) {
+
+        if (dish != null)
+        {
             return(
-                <div/>
+                <div className="row">
+                    <div  className="col-12 col-md-5 m-1">
+                        <Card>
+                            <CardImg top src={dish.image} alt={dish.name} />
+                            <CardBody>
+                                <CardTitle>{dish.name}</CardTitle>
+                                <CardText>{dish.description}</CardText>
+                            </CardBody>
+                        </Card>
+                    </div>
+                    {this.renderComments(dish.comments)}
+                </div>
             );
         }
+        else
+            return(
+                <div></div>
+            );
     }
+
+
+    render()
+    {
+        return(
+            <div>
+                {this.renderDish(this.props.dis)}
+            </div>
+        );
+    }
+
+
 }
 
-export default Dishdetail;
+
+export default DishDetail;
