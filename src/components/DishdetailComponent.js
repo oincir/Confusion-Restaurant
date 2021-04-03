@@ -1,20 +1,13 @@
 import React, {Component} from 'react';
-import {Card, CardBody,CardGroup, CardImg, CardText, CardTitle} from "reactstrap";
+import {Card, CardBody, CardImg, CardText, CardTitle} from "reactstrap";
 
-class Dishdetail extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state={
-        }
-    }
+class DishDetail extends Component {
 
     renderComments(comments){
         if (comments != null){
             const comms = comments.map((comm)=>{
-                let date= new Date(comm.date);
                 return(
-                    <div key={comm.key} className={"container"}>
+                    <div key={comm.key}>
                         {comm.comment}<br/><br/>-- {comm.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comm.date)))}
                     </div>
                 );
@@ -59,7 +52,7 @@ class Dishdetail extends Component {
 
     render() {
         return(
-            <div>
+            <div className={"container"}>
                 {this.renderDish(this.props.selectedDish)}
             </div>
         )
@@ -67,4 +60,4 @@ class Dishdetail extends Component {
     }
 }
 
-export default Dishdetail;
+export default DishDetail;
