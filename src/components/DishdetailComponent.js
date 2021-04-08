@@ -3,7 +3,7 @@ import {Card, CardBody, CardImg, CardText, CardTitle,Breadcrumb, BreadcrumbItem}
 import {Link} from 'react-router-dom'
 
 
-    const RenderComments = (comments)=>{
+    const RenderComments = (comments, addComment, dishId)=>{
         if (comments != null){
             const comms = comments.map((comm)=>{
                 return(
@@ -57,16 +57,20 @@ import {Link} from 'react-router-dom'
                     <div className={"row"}>
                         <Breadcrumb>
                             <BreadcrumbItem><Link to={`/menu`}>Menu</Link></BreadcrumbItem>
-                            <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                            <BreadcrumbItem active>{props.name}</BreadcrumbItem>
                         </Breadcrumb>
                         <div className={"col-12"}>
-                            <h3>{props.dish.name}</h3>
+                            <h3>{props.name}</h3>
                             <hr />
                         </div>
                     </div>
                     <div className="row">
                         <RenderDish dish={props.dish}/>
-                        <RenderComments comments={props.dish.comments}/>
+                        <RenderComments comments={props.comments}
+                            addComment={props.addComment}
+                            dishId = {props.dish.id}
+                        />
+
                     </div>
                 </div>
             )
