@@ -1,5 +1,5 @@
 import React from 'react';
-import {Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, CardImg, CardText, Media} from 'reactstrap';
+import {Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, CardText, Media} from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 function About(props) {
@@ -22,7 +22,7 @@ function About(props) {
 
         );
     });
-    const RenderLeader =()=>{
+    const RenderLeader = () =>{
             return (
                 <div>
                     {leaders}
