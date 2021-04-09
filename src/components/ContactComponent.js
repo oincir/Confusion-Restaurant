@@ -1,6 +1,6 @@
-import React , {Component}from 'react';
-import {Breadcrumb, BreadcrumbItem, Button, Col, Input, Label, Row} from "reactstrap";
+import React from 'react';
 import {Link} from "react-router-dom";
+import { Input, Button, Breadcrumb, BreadcrumbItem, Col, Label, Row} from "reactstrap";
 import {LocalForm, Control, Errors} from 'react-redux-form'
 
 
@@ -11,7 +11,7 @@ const minLength = (len) => (val)=> (val) && (val.length >= len);
 const isNumber = (val) => !isNaN(Number(val));
 const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2-4}$/i.test(val);
 
-class  Contact extends Component {
+class  Contact extends React.Component {
     constructor(props) {
         super(props);
 
