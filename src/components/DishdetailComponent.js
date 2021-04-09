@@ -32,7 +32,7 @@ import {Control, Errors, LocalForm} from "react-redux-form";
         return <div/>
     }
 
-    const RenderComments = ({comments})=> {
+    const RenderComments = ({comments, addComment, dishId})=> {
         if (comments != null)
             return (
                 <div className="col-12 col-md-5 m-1">
@@ -51,7 +51,7 @@ import {Control, Errors, LocalForm} from "react-redux-form";
                             );
                         })}
                     </ul>
-                    <CommentForm/>
+                    <CommentForm dishId={dishId} addComment={addComment}/>
                 </div>
             );
         else
@@ -76,7 +76,9 @@ import {Control, Errors, LocalForm} from "react-redux-form";
                     </div>
                     <div className="row">
                         <RenderDish dish={props.dish} />
-                        <RenderComments comments={props.comments} />
+                        <RenderComments comments={props.comments}
+                                        addComment={props.addComment}
+                                        dishId={props.dish.id}/>
                     </div>
                 </div>
             )
@@ -100,8 +102,8 @@ import {Control, Errors, LocalForm} from "react-redux-form";
             this.handleSubmit = this.handleSubmit.bind(this);
         }
         handleSubmit = (values) =>{
-            console.log("Current state is : "+JSON.stringify(values));
-            alert(JSON.stringify(values));
+            this.toggleModal();
+            this.props.addComment(this.props.dishId, values.rating, values.author, values.comment)
         }
         toggleModal = () =>{
             this.setState((prev)=>({

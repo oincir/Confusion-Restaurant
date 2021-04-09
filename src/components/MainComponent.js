@@ -9,6 +9,7 @@ import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
 import {connect} from "react-redux";
 import {actions} from "react-redux-form"
+import {addComment} from "../redux/ActionCreators";
 
 
 const mapStateToProps= (state) =>{
@@ -19,7 +20,9 @@ const mapStateToProps= (state) =>{
         leaders: state.leaders
     }
 }
-
+const mapDispatchToProps = (dispatch) =>({
+   addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment))
+});
 
 class Main extends Component {
 
@@ -52,6 +55,7 @@ class Main extends Component {
                     comments={this.props.comments.filter(
                         comment => comment.dishId === parseInt(match.params.dishId, 10)
                     )}
+                    addComment={this.props.addComment}
                 />
             );
         };
@@ -76,6 +80,7 @@ class Main extends Component {
 
 export default withRouter(
     connect(
-        mapStateToProps
+        mapStateToProps,
+        mapDispatchToProps
     )(Main)
 );
