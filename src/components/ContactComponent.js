@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import { Input, Button, Breadcrumb, BreadcrumbItem, Col, Label, Row} from "reactstrap";
-import {LocalForm, Control, Errors} from 'react-redux-form'
+import {Form, Control, Errors, actions} from 'react-redux-form'
 
 
 
@@ -9,7 +9,7 @@ const required = (val) => val && val.length;
 const maxLength = (len) => (val)=> !(val) || (val.length <= len);
 const minLength = (len) => (val)=> (val) && (val.length >= len);
 const isNumber = (val) => !isNaN(Number(val));
-const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2-4}$/i.test(val);
+const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
 class  Contact extends React.Component {
     constructor(props) {
@@ -20,7 +20,8 @@ class  Contact extends React.Component {
 
     handleSubmit(values){
         console.log("Current state is : "+JSON.stringify(values));
-        console.log(alert(JSON.stringify(values)));
+        alert(JSON.stringify(values));
+        this.props.resetFeedbackForm();
     }
 
     render() {
@@ -70,7 +71,7 @@ class  Contact extends React.Component {
                         <h3>Send us Your feedback</h3>
                     </div>
                     <div className="col-12 col-md-9">
-                        <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                        <Form model={"feedback"} onSubmit={(values) => this.handleSubmit(values)}>
                             <Row className={"form-group"}>
                                 <Label htmlfor="firstname" md={2}>First Name</Label>
                                 <Col md={10}>
@@ -191,7 +192,7 @@ class  Contact extends React.Component {
                                         Send Feedback</Button>
                                 </Col>
                             </Row>
-                        </LocalForm>
+                        </Form>
                     </div>
                 </div>
             </div>
